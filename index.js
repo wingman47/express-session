@@ -65,3 +65,17 @@ app.listen(3000, () => {
 // used for form inputs. it converts the incoming form data and converts them
 // to js object with key-value pairs and populates req.body with it.
 // extended: true means nested objects are allowed.
+
+
+
+// ! DETAILED EXPLANATION
+// A session can temporarily store information related to the activities of the user while connected. 
+// For example, you can store a unique confidential ID through which your applications know that the 
+// user with that particular id performs an activity. Now you don’t want to show this personal ID as 
+// it can be misused. 
+// ! Instead of storing large and continuously changing information via cookies in 
+// ! the user’s browser, only a unique identifier is stored on the client-side called a session ID. 
+// This session id is passed to the web server every time the browser makes an HTTP request. The 
+// web application pairs this session id with its internal database and retrieves the stored variables 
+// for use by the requested page.
+// ? https://meghagarwal.medium.com/storing-sessions-with-connect-mongo-in-mongodb-64d74e3bbd9c
