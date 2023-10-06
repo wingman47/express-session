@@ -12,11 +12,23 @@ import HomeHandler from "./handlers/home.js";
 import LoginHandler from "./handlers/login.js";
 import ProcessLoginHandler from "./handlers/process-login.js";
 import LogoutHandler from "./handlers/logout.js";
+import MongoDBStoreFactory from "connect-mongodb-session";
+import mongoose from "mongoose";
 
+const MongoDBStore = MongoDBStoreFactory(session);
+
+const MONGODB_URI = "mongodb+srv://arpitanand:LWWhrKieb8965GbB@sc-mern.b8waxnh.mongodb.net/auth-test?retryWrites=true&w=majority";
+
+const store = new MongoDBStore({
+  uri: MONGODB_URI,
+  collection: "sessions",
+});
 const app = express();
 
 // app.use is used for middlewares in express
 app.use(express.json());
+
+
 
 app.use(
   session({
@@ -30,8 +42,15 @@ app.use(
     // whether a session should be created even if it hasn't been
     // initialized (i.e., no data has been added to it).
     saveUninitialized: false,
+    store: store,
   })
 );
+
+mongoose
+  .connect(MONGODB_URI)
+  .catch((err) => {
+    console.log(err);
+  }); 
 
 // used for form data in request body. it sets form label as key and value as
 // value. extended allows for nested  object
