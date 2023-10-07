@@ -28,11 +28,9 @@ const app = express();
 // app.use is used for middlewares in express
 app.use(express.json());
 
-
-
 app.use(
   session({
-    secret: "secretkey!",
+    secret: "randomkey!",
     cookie: {
       maxAge: 1000 * 60 * 60 * 24, // 24 hours
     },
